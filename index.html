@@ -1,15 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Password Flower</title>
   <link rel="stylesheet" href="style/main.css">
 </head>
 <body>
-  <form id="password-form">
-    <input type="password" id="password-input">
-    <input type="submit" value="Analyze Password">
-  </form>
-  <div id="results-output"></div>
+
+  <div id="wrapper">
+
+    <div id="plant-container">
+      <div id="plant"></div>
+    </div>
+
+    <form id="password-form">
+      <input type="password" id="password-input">
+      <input type="submit" value="Analyze Password">
+    </form>
+
+  </div>
+
   <script src="script/main.js"></script>
+
 </body>
 </html>

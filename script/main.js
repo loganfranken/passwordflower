@@ -1,6 +1,6 @@
 var passwordForm = document.getElementById('password-form');
 var passwordInput = document.getElementById('password-input');
-var resultsOutput = document.getElementById('results-output');
+var plant = document.getElementById('plant');
 
 passwordForm.addEventListener('submit', function(evt) {
   evt.preventDefault();
@@ -57,6 +57,16 @@ function analyzePassword(input)
 
 function outputResults(resultsSummary)
 {
+  var state = '';
+
+  if(resultsSummary.passwordStrength < 50)
+  {
+    state = 'dead';
+  }
+
+  plant.className = state;
+
+  /*
   var resultsHtml = '';
 
   // Password Strength
@@ -70,4 +80,5 @@ function outputResults(resultsSummary)
   resultsHtml += '</ul>';
 
   resultsOutput.innerHTML = resultsHtml;
+  */
 }

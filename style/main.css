@@ -3,15 +3,72 @@ body
   margin: 2em;
 }
 
-#password-form input[type="password"]
+#wrapper
 {
+  margin: 0 auto;
+  max-width: 31.25em;
+}
+
+#password-form input
+{
+  display: block;
   font-size: 1.5em;
-  padding: 0.2em;
-  width: 20em;
+  margin: 0 auto 0.5em;
+  max-width: 20em;
+  padding: 0.25em;
+  width: 90%;
 }
 
 #password-form input[type="submit"]
 {
-  font-size: 1.5em;
-  padding: 0.2em;
+  background: #ff6d58;
+  border: 3px solid #ff5c44;
+  border-radius: 0.25em;
+  color: #FFF;
+  cursor: pointer;
+  max-width: 10em;
+  box-shadow: 0 1px #ff5c44, 0 2px #ff5c44;
+}
+
+#password-form input[type="submit"]:active
+{
+  box-shadow: none;
+  margin-top: 14px;
+  outline: none;
+}
+
+#password-form input[type="submit"]:focus
+{
+  outline: none;
+}
+
+#plant-container
+{
+  height: 0;
+  margin-bottom: 1em;
+  padding-bottom: 96.48%;
+  position: relative;
+  width: 100%;
+}
+
+#plant
+{
+  background-image: url('../images/plant_happy.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+#plant.happy
+{
+  background-image: url('../images/plant_happy.png');
+}
+
+#plant.dead
+{
+  background-image: url('../images/plant_dead.png');
 }
