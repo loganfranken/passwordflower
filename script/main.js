@@ -8,6 +8,7 @@ var isFeeding = false;
 var isWatching = false;
 
 var currPassword = '';
+var cachedPasswords = [];
 
 passwordForm.addEventListener('submit', function(evt) {
   evt.preventDefault();
@@ -50,6 +51,7 @@ function displayResults()
   wrapper.className = '';
 
   var resultsSummary = analyzePassword(currPassword);
+  cachedPasswords.push(currPassword);
   outputResults(resultsSummary);
 }
 
@@ -60,6 +62,15 @@ function analyzePassword(input)
     return {
       passwordStrength: 0,
       feedback: "You didn't feed me anything! <strong>Please, I'm so hungry!</strong>"
+    };
+  }
+
+  // Was this password already used?
+  if(cachedPasswords.includes(input))
+  {
+    return {
+      passwordStrength: 0,
+      feedback: "You already fed me that one! <strong>Feed me something original!</strong>"
     };
   }
 
