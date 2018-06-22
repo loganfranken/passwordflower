@@ -3,6 +3,7 @@ var passwordInput = document.getElementById('password-input');
 var plant = document.getElementById('plant');
 
 var isFeeding = false;
+var currPassword = '';
 
 passwordForm.addEventListener('submit', function(evt) {
   evt.preventDefault();
@@ -14,6 +15,7 @@ passwordForm.addEventListener('submit', function(evt) {
 
   isFeeding = true;
   passwordForm.className = 'feeding';
+  currPassword = passwordInput.value;
 
   window.setTimeout(feedPlant, 1000);
 });
@@ -35,7 +37,7 @@ function feedPlant()
 
 function displayResults()
 {
-  var resultsSummary = analyzePassword(passwordInput.value);
+  var resultsSummary = analyzePassword(currPassword);
   outputResults(resultsSummary);
 }
 
@@ -95,15 +97,15 @@ function outputResults(resultsSummary)
   {
     state = 'flowering';
   }
-  else if(strength < 100 && strength > 50)
+  else if(strength > 70)
   {
     state = 'happy';
   }
-  else if(strength < 50 && strength > 20)
+  else if(strength > 50)
   {
     state = 'sad';
   }
-  else if(resultsSummary.passwordStrength < 50)
+  else
   {
     state = 'dead';
   }

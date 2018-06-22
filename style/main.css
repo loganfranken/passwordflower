@@ -33,6 +33,40 @@ body
   transition: transform 1s, top 1s, left 1s;
 }
 
+#password-form.feeding input[type="password"]
+{
+  top: -8em;
+  left: 3em;
+  transform: rotate(-20deg) scale(0.7);
+}
+
+@media (min-width: 25em)
+{
+  #password-form.feeding input[type="password"]
+  {
+    top: -10em;
+    left: 3em;
+  }
+}
+
+@media (min-width: 31.25em)
+{
+  #password-form.feeding input[type="password"]
+  {
+    top: -12em;
+    left: 4em;
+  }
+}
+
+@media (min-width: 37.5em)
+{
+  #password-form.feeding input[type="password"]
+  {
+    top: -13em;
+    left: 5em;
+  }
+}
+
 #password-form input[type="submit"]
 {
   background: #ff6d58;
@@ -57,13 +91,6 @@ body
 #password-form input[type="submit"]:focus
 {
   outline: none;
-}
-
-#password-form.feeding input[type="password"]
-{
-  top: -13em;
-  left: 5em;
-  transform: rotate(-20deg) scale(0.7);
 }
 
 #plant-container
