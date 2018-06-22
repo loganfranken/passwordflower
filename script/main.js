@@ -55,49 +55,89 @@ function displayResults()
 
 function analyzePassword(input)
 {
-  var summary = {};
-
-  summary.results = [];
-  var maxStrengthPoints = 5;
-  var strengthPoints = maxStrengthPoints;
-
-  // Minimum length
-  if(input.length < 8)
+  if(input == null || input.length == 0)
   {
-    summary.results.push('I\'m hungry for a longer password!');
-    strengthPoints--;
+    return {
+      passwordStrength: 0,
+      feedback: "You didn't feed me anything! <strong>Please, I'm so hungry!</strong>"
+    };
   }
 
-  // Contain an uppercase character
-  if(!/[A-Z]/g.test(input))
+  // Is this a common password?
+  if(CommonPasswords.includes(input))
   {
-    summary.results.push('A healthy diet needs variety: I need an uppercase character');
-    strengthPoints--;
+    return {
+      passwordStrength: 0,
+      feedback: "Ugh, I'm so tired of that password. <strong>Feed me something original!</strong>"
+    };
   }
 
-  // Contain a lowercase character
-  if(!/[a-z]/g.test(input))
+  // Is the password less than 12 characters?
+  if(input.length < 12)
   {
-    summary.results.push('I need a balanced diet: can you give me some lowercase characters too?');
-    strengthPoints--;
+    return {
+      passwordStrength: 60,
+      feedback: "Ehh, that was okay. <strong>I was really hoping for something longer</strong>."
+    };
   }
 
-  // Contain a digit
-  if(!/[0-9]/g.test(input))
+  var result = null;
+  var containsSpecialCharacters = /[A-Z0-9\W]/g.test(input);
+
+  // Is the password at least 16 characters?
+  if(input.length >= 16)
   {
-    summary.results.push('I\'m really craving some numbers too');
-    strengthPoints--;
+    result = {
+      passwordStrength: 100,
+      feedback: "Yummy! That was a <strong>delicious password</strong>!"
+    };
+  }
+  // Is the password at least 12 characters?
+  else if(input.length >= 12)
+  {
+    if(containsSpecialCharacters)
+    {
+      // WITH special characters
+      result = {
+        passwordStrength: 100,
+        feedback: "Yummy! That was a <strong>delicious password</strong>!"
+      };
+    }
+    else
+    {
+      // WITHOUT special characters
+      result = {
+        passwordStrength: 80,
+        feedback: "Pretty good! <strong>I'm craving something longer or with a little variety</strong>, though."
+      };
+    }
   }
 
-  // Contain a special character
-  if(!/[\W]/g.test(input))
+  if(/[A-Z]/.test(input.substring(0, 1)))
   {
-    summary.results.push('Could use some more flavor: maybe add a special character?');
-    strengthPoints--;
+    result = {
+      passwordStrength: 80,
+      feedback: "Not bad. <strong>I love uppercase characters, but not at the beginning</strong>."
+    };
   }
 
-  summary.passwordStrength = (strengthPoints/maxStrengthPoints) * 100;
-  return summary;
+  if(/[0-9]/.test(input.substring(input.length - 1, input.length)))
+  {
+    result = {
+      passwordStrength: 80,
+      feedback: "Not bad. <strong>I love numbers, but not at the end</strong>."
+    };
+  }
+
+  if(/[\!]/.test(input.substring(input.length - 1, input.length)))
+  {
+    result = {
+      passwordStrength: 80,
+      feedback: "Not bad. <strong>I love a good exclamation mark, but not at the end</strong>."
+    };
+  }
+
+  return result;
 }
 
 function outputResults(resultsSummary)
@@ -123,14 +163,50 @@ function outputResults(resultsSummary)
   }
 
   plant.className = state;
-
-  if(strength === 100)
-  {
-    feedback.innerHTML = 'Wow! That password was delicious!'
-  }
-  else
-  {
-    feedback.innerHTML = resultsSummary.results[0];
-  }
-
+  feedback.innerHTML = resultsSummary.feedback;
 }
+
+var CommonPasswords = [
+  'welcome',
+  'qwert',
+  'abc123',
+  'password',
+  'password1',
+  'iloveyou',
+  'princess',
+  '123456',
+  '12345',
+  '123456789',
+  'Password123',
+  '12345678',
+  '696969',
+  '111111',
+  '6969',
+  'Iwantyou',
+  'Babygirl',
+  '654321',
+  '666666',
+  '121212',
+  'ZZZZZZ',
+  'Ferrari',
+  'Maddog',
+  'Booboo',
+  'Hooters',
+  'Tomcat',
+  'Badboy',
+  'Booger',
+  'Matrix',
+  'Bigdaddy',
+  '232323',
+  '4444',
+  '00000',
+  'Booty',
+  '112233',
+  'Rosebud',
+  'Blonde',
+  'Tester',
+  '123123',
+  'Mustang',
+  'Cowboy',
+  'changeme'
+];
