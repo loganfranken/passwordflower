@@ -9,6 +9,12 @@ body
   max-width: 31.25em;
 }
 
+#password-form
+{
+  border-top: 1px solid #FFF;
+  position: relative;
+}
+
 #password-form input
 {
   display: block;
@@ -19,27 +25,45 @@ body
   width: 90%;
 }
 
+#password-form input[type="password"]
+{
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: transform 1s, top 1s, left 1s;
+}
+
 #password-form input[type="submit"]
 {
   background: #ff6d58;
   border: 3px solid #ff5c44;
   border-radius: 0.25em;
+  box-shadow: 0 1px #ff5c44, 0 2px #ff5c44;
   color: #FFF;
   cursor: pointer;
+  margin-top: 2.3em;
   max-width: 10em;
-  box-shadow: 0 1px #ff5c44, 0 2px #ff5c44;
+  opacity: 1;
+  transition: opacity 0.2s;
 }
 
 #password-form input[type="submit"]:active
 {
   box-shadow: none;
-  margin-top: 14px;
+  margin-top: 2.4em;
   outline: none;
 }
 
 #password-form input[type="submit"]:focus
 {
   outline: none;
+}
+
+#password-form.feeding input[type="password"]
+{
+  top: -13em;
+  left: 5em;
+  transform: rotate(-20deg) scale(0.7);
 }
 
 #plant-container
@@ -68,7 +92,17 @@ body
   background-image: url('../images/plant_happy.png');
 }
 
+#plant.sad
+{
+  background-image: url('../images/plant_sad.png');
+}
+
 #plant.dead
 {
   background-image: url('../images/plant_dead.png');
+}
+
+#plant.flowering
+{
+  background-image: url('../images/plant_flowering.png');
 }

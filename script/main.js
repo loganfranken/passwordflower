@@ -2,11 +2,42 @@ var passwordForm = document.getElementById('password-form');
 var passwordInput = document.getElementById('password-input');
 var plant = document.getElementById('plant');
 
+var isFeeding = false;
+
 passwordForm.addEventListener('submit', function(evt) {
   evt.preventDefault();
+
+  if(isFeeding)
+  {
+    return;
+  }
+
+  isFeeding = true;
+  passwordForm.className = 'feeding';
+
+  window.setTimeout(feedPlant, 1000);
+});
+
+function feedPlant()
+{
+  if(passwordInput.value.length === 0)
+  {
+    isFeeding = false;
+    passwordForm.className = '';
+    window.setTimeout(displayResults, 1000);
+  }
+  else
+  {
+    passwordInput.value = passwordInput.value.substring(0, passwordInput.value.length - 1);
+    window.setTimeout(feedPlant, 100);
+  }
+}
+
+function displayResults()
+{
   var resultsSummary = analyzePassword(passwordInput.value);
   outputResults(resultsSummary);
-});
+}
 
 function analyzePassword(input)
 {
@@ -58,27 +89,24 @@ function analyzePassword(input)
 function outputResults(resultsSummary)
 {
   var state = '';
+  var strength = resultsSummary.passwordStrength;
 
-  if(resultsSummary.passwordStrength < 50)
+  if(strength === 100)
+  {
+    state = 'flowering';
+  }
+  else if(strength < 100 && strength > 50)
+  {
+    state = 'happy';
+  }
+  else if(strength < 50 && strength > 20)
+  {
+    state = 'sad';
+  }
+  else if(resultsSummary.passwordStrength < 50)
   {
     state = 'dead';
   }
 
   plant.className = state;
-
-  /*
-  var resultsHtml = '';
-
-  // Password Strength
-  resultsHtml += '<div><strong>Password Strength:</strong> ' + resultsSummary.passwordStrength + '</div>';
-
-  // Results
-  resultsHtml += '<ul>';
-  resultsSummary.results.forEach(function(result) {
-    resultsHtml += '<li>' + result + '</li>';
-  });
-  resultsHtml += '</ul>';
-
-  resultsOutput.innerHTML = resultsHtml;
-  */
 }
